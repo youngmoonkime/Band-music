@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Band Master - Retro Lobby</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#FF3366", // Retro bright pink
+              secondary: "#00FFFF", // Cyber cyan
+              tertiary: "#FFCC00", // Arcade yellow
+              "retro-bg": "#2A2A2A", // Dark grey retro bg
+              "retro-panel": "rgba(0, 0, 0, 0.7)",
+              "retro-border": "#555",
+            },
+            fontFamily: {
+              display: ["Orbitron", "sans-serif"],
+              body: ["Rajdhani", "sans-serif"],
+              pixel: ["'Press Start 2P'", "cursive"],
+            },
+            boxShadow: {
+              "retro-glow":
+                "0 0 10px rgba(0, 255, 255, 0.5), inset 0 0 5px rgba(0, 255, 255, 0.3)",
+              "retro-button":
+                "inset 2px 2px 0px rgba(255,255,255,0.3), inset -2px -2px 0px rgba(0,0,0,0.5)",
+              "note-glow":
+                "0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px var(--note-color)",
+            },
+            backgroundImage: {
+              "metal-gradient":
+                "linear-gradient(180deg, #4a4a4a 0%, #2a2a2a 50%, #1a1a1a 100%)",
+              "highway-gradient":
+                "linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(20,20,20,0.8) 100%)",
+            },
+            animation: {
+              fall: "fall 2s linear infinite",
+              pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+              pop: "pop 0.1s ease-out",
+            },
+            keyframes: {
+              fall: {
+                "0%": { top: "-10%", opacity: "0", transform: "scale(0.5)" },
+                "10%": { opacity: "1" },
+                "100%": { top: "90%", opacity: "1", transform: "scale(1)" },
+              },
+              pop: {
+                "0%": { transform: "scale(1)" },
+                "50%": { transform: "scale(1.3)" },
+                "100%": { transform: "scale(1)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #111;
+        overflow: hidden;
+      }
+      .scanlines {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            rgba(18, 16, 16, 0) 50%,
+            rgba(0, 0, 0, 0.25) 50%
+          ),
+          linear-gradient(
+            90deg,
+            rgba(255, 0, 0, 0.06),
+            rgba(0, 255, 0, 0.02),
+            rgba(0, 0, 255, 0.06)
+          );
+        background-size:
+          100% 4px,
+          6px 100%;
+        pointer-events: none;
+        z-index: 50;
+      }
+      .note {
+        animation: fall 2s linear infinite;
+      }
+      .note-1 {
+        animation-delay: 0s;
+        --note-color: #ff3366;
+      }
+      .note-2 {
+        animation-delay: 0.5s;
+        --note-color: #00ffff;
+      }
+      .note-3 {
+        animation-delay: 1.2s;
+        --note-color: #ffcc00;
+      }
+      .note-4 {
+        animation-delay: 0.8s;
+        --note-color: #33ff66;
+      }
+      input[type="range"] {
+        -webkit-appearance: none;
+        background: transparent;
+        height: 6px;
+        border-radius: 2px;
+        border: 1px solid #555;
+        background: #222;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: 14px;
+        width: 8px;
+        background: #ccc;
+        border: 1px solid #fff;
+        cursor: pointer;
+        box-shadow: 0 0 2px black;
+        margin-top: -5px; /* Adjust if needed */
+      }
+      input[type="range"]::-moz-range-thumb {
+        height: 14px;
+        width: 8px;
+        background: #ccc;
+        border: 1px solid #fff;
+        cursor: pointer;
+        box-shadow: 0 0 2px black;
+      }
+      /* Ensure thumb is vertically centered */
+      input[type="range"]::-webkit-slider-runnable-track {
+        height: 4px;
+        background: #444;
+      }
+      .glossy-bar {
+        background: linear-gradient(
+          to bottom,
+          #4c4c4c 0%,
+          #2c2c2c 50%,
+          #000000 51%,
+          #131313 100%
+        );
+        border: 1px solid #666;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      }
+      .clip-path-slant {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
